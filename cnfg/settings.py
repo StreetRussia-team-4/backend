@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'users',
     'about',
     'employees',
-    'events',
     'info',
     'media_content',
     'regional_offices',
