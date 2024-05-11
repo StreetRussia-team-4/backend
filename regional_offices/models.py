@@ -19,12 +19,12 @@ class Citi(models.Model):
     name = models.CharField('Название', max_length=255, unique=True)
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
-                               related_name='cities',
                                on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
+        default_related_name = 'cities'
 
     def __str__(self):
         return f'{self.name}'
@@ -43,15 +43,12 @@ class Spot(models.Model):
     website = models.URLField('Ссылка на сайт')
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
-                               related_name='spots',
                                on_delete=models.CASCADE)
     citi = models.ForeignKey(Citi,
                              verbose_name='Город',
-                             related_name='spots',
                              on_delete=models.CASCADE)
     discipline = models.ManyToManyField(Discipline,
-                                        verbose_name='Дисциплина',
-                                        related_name='spots')
+                                        verbose_name='Дисциплина')
     gallery = models.ManyToManyField(Image,
                                      verbose_name='Галерея')
     videos = models.ManyToManyField(Video,
@@ -61,6 +58,7 @@ class Spot(models.Model):
     class Meta:
         verbose_name = 'Площадка'
         verbose_name_plural = 'Площадки'
+        default_related_name = 'spots'
 
     def __str__(self):
         return f'{self.name}'

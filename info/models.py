@@ -25,24 +25,22 @@ class Blog(models.Model):
     source_link = models.URLField('Ссылка на источник')
     discipline = models.ForeignKey(Discipline,
                                    verbose_name='Дисциплина',
-                                   related_name='%(app_label)s_%(class)ss',
                                    on_delete=models.SET_NULL,
                                    null=True,
                                    blank=True)
     partner = models.ForeignKey(Partner,
                                 verbose_name='Партнер',
-                                related_name='%(app_label)s_%(class)ss',
                                 on_delete=models.SET_NULL,
                                 null=True,
                                 blank=True)
     preview = models.ForeignKey(Image,
                                 verbose_name='Превью',
-                                related_name='%(app_label)s_%(class)ss',
                                 to_field='image',
                                 on_delete=models.PROTECT)
 
     class Meta:
         abstract = True
+        default_related_name = '%(class)ss'
 
 
 class Article(Blog):
@@ -57,6 +55,7 @@ class Article(Blog):
 class Interview(Blog):
     class Meta:
         verbose_name = 'Интервью'
+        verbose_name_plural = 'Интервью'
 
     def __str__(self):
         return f'{self.name}'

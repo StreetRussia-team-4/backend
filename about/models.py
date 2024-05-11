@@ -24,12 +24,12 @@ class Partner(models.Model):
                              on_delete=models.PROTECT)
     type = models.ForeignKey(PartnerType,
                              verbose_name='Тип партнера',
-                             related_name='partners',
                              on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = 'Партнер'
         verbose_name_plural = 'Партнеры'
+        default_related_name = 'partners'
 
     def __str__(self):
         return f'{self.name}'

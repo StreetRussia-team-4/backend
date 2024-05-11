@@ -18,28 +18,27 @@ class Employee(models.Model):
     tel = models.CharField('Телефон', max_length=12)
     photo = models.ForeignKey(Image,
                               verbose_name='Фото',
-                              related_name='+',
                               to_field='image',
+                              related_name='+',
                               on_delete=models.PROTECT)
     banner = models.ForeignKey(Image,
                                verbose_name='Банер',
-                               related_name='+',
                                to_field='image',
+                               related_name='+',
                                on_delete=models.PROTECT)
     video = models.ForeignKey(Video,
                               verbose_name='Ссылка на видео',
-                              related_name='+',
                               to_field='video',
                               on_delete=models.SET_NULL,
                               null=True,
                               blank=True)
     discipline = models.ForeignKey(Discipline,
                                    verbose_name='Дисциплина',
-                                   related_name='%(app_label)s_%(class)ss',
                                    on_delete=models.PROTECT)
 
     class Meta:
         abstract = True
+        default_related_name = '+'
 
 
 class FederalManager(Employee):
@@ -54,12 +53,12 @@ class FederalManager(Employee):
 class RegionalManager(Employee):
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
-                               related_name='employees',
                                on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Региональный руководитель'
         verbose_name_plural = 'Региональное руководство'
+        default_related_name = 'regional_managers'
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

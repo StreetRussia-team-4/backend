@@ -14,18 +14,14 @@ class Event(models.Model):
     website = models.URLField('Ссылка на сайт')
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
-                               related_name='events',
                                on_delete=models.CASCADE)
     employee = models.ForeignKey(RegionalManager,
                                  verbose_name='Сотрудник',
-                                 related_name='events',
                                  on_delete=models.PROTECT)
     disciplines = models.ManyToManyField(Discipline,
-                                         verbose_name='Дисциплины',
-                                         related_name='events')
+                                         verbose_name='Дисциплины')
     partners = models.ManyToManyField(Partner,
                                       verbose_name='Партнеры',
-                                      related_name='events',
                                       blank=True)
     gallery = models.ManyToManyField(Image,
                                      verbose_name='Галерея')
@@ -39,6 +35,7 @@ class Event(models.Model):
     class Meta:
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
+        default_related_name = 'events'
 
     def __str__(self):
         return f'{self.name}'
