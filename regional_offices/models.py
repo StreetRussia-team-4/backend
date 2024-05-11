@@ -1,5 +1,6 @@
 from django.db import models
 
+from about.models import Partner
 from info.models import Discipline
 from media_content.models import Image, Video
 
@@ -59,6 +60,40 @@ class Spot(models.Model):
         verbose_name = 'Площадка'
         verbose_name_plural = 'Площадки'
         default_related_name = 'spots'
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Event(models.Model):
+    name = models.CharField('Название', max_length=255, unique=True)
+    description = models.TextField('Описание')
+    date = models.DateTimeField('Дата и время')
+    website = models.URLField('Ссылка на сайт')
+    region = models.ForeignKey(Region,
+                               verbose_name='Регион',
+                               on_delete=models.CASCADE)
+    employee = models.ForeignKey('employees.RegionalManager',
+                                 verbose_name='Сотрудник',
+                                 on_delete=models.PROTECT)
+    disciplines = models.ManyToManyField(Discipline,
+                                         verbose_name='Дисциплины')
+    partners = models.ManyToManyField(Partner,
+                                      verbose_name='Партнеры',
+                                      blank=True)
+    gallery = models.ManyToManyField(Image,
+                                     verbose_name='Галерея')
+    video = models.ForeignKey(Video,
+                              verbose_name='Ссылка на видео',
+                              to_field='video',
+                              on_delete=models.SET_NULL,
+                              null=True,
+                              blank=True)
+
+    class Meta:
+        verbose_name = 'Событие'
+        verbose_name_plural = 'События'
+        default_related_name = 'events'
 
     def __str__(self):
         return f'{self.name}'
