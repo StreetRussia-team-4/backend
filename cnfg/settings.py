@@ -47,6 +47,12 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'users',
+    'about',
+    'employees',
+    'events',
+    'info',
+    'media_content',
+    'regional_offices',
 ]
 
 MIDDLEWARE = [
