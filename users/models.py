@@ -11,12 +11,12 @@ class User(AbstractUser):
         (REGIONAL_MANAGER, 'Региональный руководитель'),
         (USER, 'Пользователь')
     )
-    username = None
+    username = models.CharField('Имя пользователя', max_length=150)
     status = models.CharField('Статус', max_length=4, choices=STATUSES, default=USER)
     email = models.EmailField('Электронная почта', unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     class Meta:
         verbose_name = 'Пользователь'
