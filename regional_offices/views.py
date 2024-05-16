@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework.filters import SearchFilter
 
 from regional_offices.models import Event
-from regional_offices.serializers import EventSerializer
+from regional_offices.serializers.event import EventSerializer
 
 
 class BaseEvent:
