@@ -20,4 +20,15 @@ class EventSerializer(ModelSerializer):
 
     class Meta:
         model = Event
-        fields = '__all__'
+        fields = (
+            "name",
+            "description",
+            "date",
+            "website",
+            "region",
+            "employee",
+            "disciplines",
+            "partners",
+            "gallery",
+            "video",
+        )
