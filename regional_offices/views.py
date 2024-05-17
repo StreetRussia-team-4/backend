@@ -18,10 +18,13 @@ class BaseEvent:
         .select_related("region", "employee", "video")
         .prefetch_related(
             # 'disciplines',
-            Prefetch('disciplines', queryset=Discipline.objects.prefetch_related('videos').all()),
+            Prefetch(
+                'disciplines',
+                queryset=Discipline.objects.prefetch_related('videos').all()
+            ),
             "partners",
             Prefetch('gallery', queryset=Image.objects.all()),
-            # "gallery"   
+            # "gallery"
         )
         .all()
     )# TODO: оптимизировать запрос
