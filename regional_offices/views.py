@@ -1,7 +1,10 @@
+from django.db.models import Prefetch
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import SearchFilter
 
+from info.models import Discipline
+from media_content.models import Image
 from regional_offices.models import Event
 from regional_offices.serializers.event import EventListSerializer, \
     EventRetrieveSerializer
@@ -10,7 +13,18 @@ from regional_offices.serializers.event import EventListSerializer, \
 class BaseEvent:
     """Базовый класс событий."""
 
-    queryset = Event.objects.all()
+    queryset = (
+        Event.objects
+        .select_related("region", "employee", "video")
+        .prefetch_related(
+            # 'disciplines',
+            Prefetch('disciplines', queryset=Discipline.objects.prefetch_related('videos').all()),
+            "partners",
+            Prefetch('gallery', queryset=Image.objects.all()),
+            # "gallery"   
+        )
+        .all()
+    )# TODO: оптимизировать запрос
 
 
 class EventList(BaseEvent, generics.ListAPIView):
