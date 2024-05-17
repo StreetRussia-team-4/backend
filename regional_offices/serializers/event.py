@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
+from employees.serializers import RegionalManagerSerializer
 from info.serializers import DisciplineSerializer
 from media_content.serializers import ImageSerializer, VideoSerializer
 from regional_offices.models import Event
@@ -38,7 +39,7 @@ class EventRetrieveSerializer(ModelSerializer):
 
     region = RegionSerializer(read_only=True)
     partners = PartnerSerializer(many=True, read_only=True)
-    # employee = RegionalManagerSerializer(read_only=True)
+    employee = RegionalManagerSerializer(read_only=True)
     disciplines = DisciplineSerializer(many=True, read_only=True)
     gallery = ImageSerializer(many=True, read_only=True)
     video = VideoSerializer(read_only=True)
