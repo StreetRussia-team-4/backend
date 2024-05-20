@@ -6,6 +6,8 @@ from media_content.models import Image, Video
 
 
 class Region(models.Model):
+    """Регион."""
+
     name = models.CharField('Название', max_length=255, unique=True)
 
     class Meta:
@@ -17,6 +19,8 @@ class Region(models.Model):
 
 
 class Citi(models.Model):
+    """Город."""
+
     name = models.CharField('Название', max_length=255, unique=True)
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
@@ -32,6 +36,8 @@ class Citi(models.Model):
 
 
 class Spot(models.Model):
+    """Локация."""
+
     OPEN = 'OP'
     CLOSED = 'CL'
     TYPES = (
@@ -66,6 +72,8 @@ class Spot(models.Model):
 
 
 class Event(models.Model):
+    """Событие."""
+
     name = models.CharField('Название', max_length=255, unique=True)
     description = models.TextField('Описание')
     date = models.DateTimeField('Дата и время')
