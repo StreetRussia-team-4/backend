@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from about.models import Partner
 from regional_offices.models import Region
@@ -9,14 +10,9 @@ class Project(models.Model):
     CURRENT = "current"
     FUTURE = "future"
     DONE = "done"
-    STATUS = (
-        (CURRENT, 'Текущий'),
-        (FUTURE, 'Предстоящий'),
-        (DONE, "Выполненный"),
-    )
-    status = models.CharField(
-        'Статус', max_length=8, choices=STATUS, default=FUTURE
-    )
+    STATUS = {CURRENT: 'current', FUTURE: 'future', DONE: 'done'}
+
+    done = models.BooleanField('Проект выполнен', default=False)
     name = models.CharField('Название', max_length=255, unique=True)
     description = models.TextField('Описание')
     region = models.ForeignKey(
@@ -32,8 +28,12 @@ class Project(models.Model):
     preview = models.ImageField('Изображение', upload_to='images/')
     start_date = models.DateField('Дата начала')
     end_date = models.DateField('Дата окончания')
-    funds_raised = models.IntegerField('Объем финансирования')
-    goal = models.IntegerField('Цель')
+    funds_raised = models.DecimalField(
+        'Объем финансирования', max_digits=8, decimal_places=2
+    )
+    goal = models.DecimalField(
+        'Цель', max_digits=8, decimal_places=2
+    )
 
     class Meta:
         verbose_name = 'Проект'
@@ -42,3 +42,13 @@ class Project(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def current_status(self):
+        """Статус проекта в текущем состоянии."""
+        if not self.done:
+            now = timezone.now().date()
+            if self.start_date <= now <= self.end_date:
+                return self.STATUS[self.CURRENT]
+            elif self.start_date > now:
+                return self.STATUS[self.FUTURE]
+        return self.STATUS[self.DONE]
