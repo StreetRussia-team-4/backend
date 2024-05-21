@@ -99,9 +99,9 @@ WSGI_APPLICATION = 'cnfg.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.' + os.getenv('DB_ENGINE', default='sqlite3'),
-        'NAME': os.getenv('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'NAME': 'postgre',
+        'USER': 'postgre',
+        'PASSWORD': 'postgre',
         'HOST': 'db',
         'PORT': 5432,
     }
