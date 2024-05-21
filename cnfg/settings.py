@@ -31,7 +31,7 @@ DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ['*']
     CORS_ALLOW_ALL_ORIGINS = True
-    CSRF_TRUSTED_ORIGINS = list(os.getenv('CSRF_ORIGIN', default=''))
+    CSRF_TRUSTED_ORIGINS = ['http://*.213.189.221.212']
 else:
     ALLOWED_HOSTS = []
 
