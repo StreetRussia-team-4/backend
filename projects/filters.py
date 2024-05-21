@@ -14,7 +14,7 @@ class ProjectFilter(django_filters.FilterSet):
     )
     current_status = django_filters.ChoiceFilter(
         label='Статус',
-        choices=Project.STATUS,
+        choices=Project.STATUS_CHOICES,
         method='filter_by_current_status',
     )
 

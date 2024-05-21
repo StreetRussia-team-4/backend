@@ -11,7 +11,12 @@ class Project(models.Model):
     CURRENT = "current"
     FUTURE = "future"
     DONE = "done"
-    STATUS = {CURRENT: 'current', FUTURE: 'future', DONE: 'done'}
+    STATUS_CHOICES = (
+        (CURRENT, 'current'),
+        (FUTURE, 'future'),
+        (DONE, 'done')
+    )
+    STATUS = {v: k for k, v in STATUS_CHOICES}
 
     is_finished = models.BooleanField('Проект выполнен', default=False)
     name = models.CharField('Название', max_length=255, unique=True)
