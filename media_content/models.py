@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Video(models.Model):
-    video = models.URLField('Ссылка на видео', unique=True)
+    video = models.URLField('Ссылка на видео')
 
     class Meta:
         verbose_name = 'Видео'
@@ -13,7 +13,7 @@ class Video(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField('Изображение', upload_to='images/', unique=True)
+    image = models.ImageField('Изображение', upload_to='images/')
 
     class Meta:
         verbose_name = 'Изображение'

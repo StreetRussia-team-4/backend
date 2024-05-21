@@ -1,7 +1,6 @@
 from django.db import models
 
 from info.models import Discipline
-from media_content.models import Image, Video
 from regional_offices.models import Region
 
 
@@ -11,27 +10,14 @@ class Employee(models.Model):
     last_name = models.CharField('Фамилия', max_length=255)
     birthday = models.DateField('Дата рождения')
     career_start = models.DateField('Начало карьеры')
-    citi_of_birth = models.CharField('Место рождения', max_length=255)
+    city_of_birth = models.CharField('Место рождения', max_length=255)
     bio = models.TextField('Биография')
     vk_page = models.URLField('Страница Вконтакте', blank=True)
     email = models.EmailField('Электронная почта')
     tel = models.CharField('Телефон', max_length=12)
-    photo = models.ForeignKey(Image,
-                              verbose_name='Фото',
-                              to_field='image',
-                              related_name='+',
-                              on_delete=models.PROTECT)
-    banner = models.ForeignKey(Image,
-                               verbose_name='Банер',
-                               to_field='image',
-                               related_name='+',
-                               on_delete=models.PROTECT)
-    video = models.ForeignKey(Video,
-                              verbose_name='Ссылка на видео',
-                              to_field='video',
-                              on_delete=models.SET_NULL,
-                              null=True,
-                              blank=True)
+    photo = models.ImageField('Фото', upload_to='images/')
+    banner = models.ImageField('Банер', upload_to='images/')
+    video = models.URLField('Ссылка на видео', null=True, blank=True)
     discipline = models.ForeignKey(Discipline,
                                    verbose_name='Дисциплина',
                                    on_delete=models.PROTECT)

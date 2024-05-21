@@ -1,7 +1,7 @@
 from django.db import models
 
 from about.models import Partner
-from media_content.models import Image, Video
+from media_content.models import Video
 
 
 class Discipline(models.Model):
@@ -33,10 +33,7 @@ class Blog(models.Model):
                                 on_delete=models.SET_NULL,
                                 null=True,
                                 blank=True)
-    preview = models.ForeignKey(Image,
-                                verbose_name='Превью',
-                                to_field='image',
-                                on_delete=models.PROTECT)
+    preview = models.ImageField('Превью', upload_to='images/')
 
     class Meta:
         abstract = True

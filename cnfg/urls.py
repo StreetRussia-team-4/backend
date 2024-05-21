@@ -4,10 +4,9 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-
 api_v1 = [
     path('api/v1/users/', include('users.urls')),
-    path('api/v1/regional_offices/', include('regional_offices.urls'))
+    path('api/v1/regional-offices/', include('regional_offices.urls'))
 ]
 
 urlpatterns = [

@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from media_content.models import Image
+from media_content.models import Image, Video
 
 
 class ImageSerializer(ModelSerializer):
@@ -8,12 +8,12 @@ class ImageSerializer(ModelSerializer):
 
     class Meta:
         model = Image
-        fields = '__all__'
+        fields = ('image',)
 
 
 class VideoSerializer(ModelSerializer):
     """Serializer для модели Видео."""
 
     class Meta:
-        model = Image
-        fields = '__all__'
+        model = Video
+        fields = ('video',)

@@ -1,7 +1,5 @@
 from django.db import models
 
-from media_content.models import Image
-
 
 class PartnerType(models.Model):
     name = models.CharField('Название', max_length=255, unique=True)
@@ -18,10 +16,7 @@ class Partner(models.Model):
     name = models.CharField('Название', max_length=255, unique=True)
     description = models.TextField('Описание')
     website = models.URLField('Ссылка на сайт')
-    logo = models.ForeignKey(Image,
-                             verbose_name='Логотип',
-                             to_field='image',
-                             on_delete=models.PROTECT)
+    logo = models.ImageField('Логотип', upload_to='images/')
     type = models.ForeignKey(PartnerType,
                              verbose_name='Тип партнера',
                              on_delete=models.PROTECT)
