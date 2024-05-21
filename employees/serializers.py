@@ -1,13 +1,10 @@
 from rest_framework.serializers import ModelSerializer
 
 from employees.models import RegionalManager
-from media_content.serializers import ImageSerializer
 
 
 class RegionalManagerSerializer(ModelSerializer):
     """Serializer для модели Региональный руководитель."""
-
-    photo = ImageSerializer(read_only=True)
 
     class Meta:
         model = RegionalManager

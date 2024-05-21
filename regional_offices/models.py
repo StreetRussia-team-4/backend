@@ -85,7 +85,9 @@ class Event(models.Model):
                                on_delete=models.CASCADE)
     employee = models.ForeignKey('employees.RegionalManager',
                                  verbose_name='Сотрудник',
-                                 on_delete=models.PROTECT)
+                                 on_delete=models.PROTECT,
+                                 null=True,
+                                 blank=True)
     disciplines = models.ManyToManyField(Discipline,
                                          verbose_name='Дисциплины')
     partners = models.ManyToManyField(Partner,
