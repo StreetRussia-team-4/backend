@@ -1,12 +1,12 @@
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
-from regional_offices import views
+from regional_offices.views import EventReadViewSet
+
+v1_events_router = DefaultRouter()
+v1_events_router.register(r'events', EventReadViewSet, basename='news')
+
 
 urlpatterns = [
-    path('events/', views.EventList.as_view(), name='event_list'),
-    path(
-        'events/<int:pk>',
-        views.EventRetrieve.as_view(),
-        name='event_detail'
-    ),
+    path('', include(v1_events_router.urls)),
 ]

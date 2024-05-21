@@ -18,7 +18,7 @@ class Region(models.Model):
         return f'{self.name}'
 
 
-class Citi(models.Model):
+class City(models.Model):
     """Город."""
 
     name = models.CharField('Название', max_length=255, unique=True)
@@ -51,7 +51,7 @@ class Spot(models.Model):
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
                                on_delete=models.CASCADE)
-    citi = models.ForeignKey(Citi,
+    city = models.ForeignKey(City,
                              verbose_name='Город',
                              on_delete=models.CASCADE)
     discipline = models.ManyToManyField(Discipline,
@@ -78,25 +78,21 @@ class Event(models.Model):
     description = models.TextField('Описание')
     date = models.DateTimeField('Дата и время')
     website = models.URLField('Ссылка на сайт')
+    preview = models.ImageField('Изображение', upload_to='images/')
+    video = models.URLField('Ссылка на видео', null=True, blank=True)
     region = models.ForeignKey(Region,
                                verbose_name='Регион',
                                on_delete=models.CASCADE)
     employee = models.ForeignKey('employees.RegionalManager',
                                  verbose_name='Сотрудник',
-                                 on_delete=models.PROTECT)
+                                 on_delete=models.PROTECT,
+                                 null=True,
+                                 blank=True)
     disciplines = models.ManyToManyField(Discipline,
                                          verbose_name='Дисциплины')
     partners = models.ManyToManyField(Partner,
                                       verbose_name='Партнеры',
                                       blank=True)
-    gallery = models.ManyToManyField(Image,
-                                     verbose_name='Галерея')
-    video = models.ForeignKey(Video,
-                              verbose_name='Ссылка на видео',
-                              to_field='video',
-                              on_delete=models.SET_NULL,
-                              null=True,
-                              blank=True)
 
     class Meta:
         verbose_name = 'Событие'
