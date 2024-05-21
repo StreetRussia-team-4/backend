@@ -30,8 +30,8 @@ class Project(models.Model):
         blank=True
     )
     preview = models.ImageField('Изображение', upload_to='images/')
-    start_date = models.DateTimeField('Дата начала')
-    end_date = models.DateTimeField('Дата окончания')
+    start_date = models.DateField('Дата начала')
+    end_date = models.DateField('Дата окончания')
     funds_raised = models.IntegerField('Объем финансирования')
     goal = models.IntegerField('Цель')
 
