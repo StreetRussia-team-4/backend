@@ -27,15 +27,15 @@ class ProjectFilter(django_filters.FilterSet):
             today = timezone.now().date()
             if value == self.Meta.model.CURRENT:
                 queryset = queryset.filter(
-                    done=False,
+                    is_finished=False,
                     start_date__lte=today,
                     end_date__gte=today
                 )
             else:
                 queryset = queryset.filter(
-                    done=False,
+                    is_finished=False,
                     start_date__gt=today
                 )
             return queryset
-        queryset = queryset.filter(done=True)
+        queryset = queryset.filter(is_finished=True)
         return queryset

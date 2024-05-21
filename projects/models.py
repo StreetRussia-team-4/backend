@@ -13,7 +13,7 @@ class Project(models.Model):
     DONE = "done"
     STATUS = {CURRENT: 'current', FUTURE: 'future', DONE: 'done'}
 
-    done = models.BooleanField('Проект выполнен', default=False)
+    is_finished = models.BooleanField('Проект выполнен', default=False)
     name = models.CharField('Название', max_length=255, unique=True)
     description = models.TextField('Описание')
     region = models.ForeignKey(
@@ -57,7 +57,7 @@ class Project(models.Model):
     @property
     def current_status(self):
         """Статус проекта в текущем состоянии."""
-        if not self.done:
+        if not self.is_finished:
             now = timezone.now().date()
             if self.start_date <= now <= self.end_date:
                 return self.STATUS[self.CURRENT]
