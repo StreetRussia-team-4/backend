@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
@@ -43,6 +44,17 @@ class Project(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+    def clean(self):
+        if (
+                self.end_date and self.start_date
+                and self.end_date < self.start_date
+        ):
+            raise ValidationError(
+                {'end_date': 'Дата окончания должна быть больше даты начала'}
+            )
+        super().clean()
+
+    @property
     def current_status(self):
         """Статус проекта в текущем состоянии."""
         if not self.done:
