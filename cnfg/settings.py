@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'info',
     'media_content',
     'regional_offices',
+    'projects',
 ]
 
 MIDDLEWARE = [
