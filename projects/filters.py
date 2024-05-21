@@ -1,5 +1,4 @@
 import django_filters
-from django.db import models
 from django.utils import timezone
 
 from projects.models import Project
