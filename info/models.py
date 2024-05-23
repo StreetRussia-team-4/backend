@@ -5,6 +5,8 @@ from media_content.models import Video
 
 
 class Discipline(models.Model):
+    """Дисциплина."""
+
     name = models.CharField('Название', max_length=255, unique=True)
     description = models.TextField('Описание')
     videos = models.ManyToManyField(Video,
@@ -19,20 +21,26 @@ class Discipline(models.Model):
 
 
 class Blog(models.Model):
+    """Абстрактный пост."""
+
     name = models.CharField('Название', max_length=255, unique=True)
     description = models.TextField('Описание')
     pub_date = models.DateField('Дата публикации', auto_now_add=True)
     source_link = models.URLField('Ссылка на источник')
-    discipline = models.ForeignKey(Discipline,
-                                   verbose_name='Дисциплина',
-                                   on_delete=models.SET_NULL,
-                                   null=True,
-                                   blank=True)
-    partner = models.ForeignKey(Partner,
-                                verbose_name='Партнер',
-                                on_delete=models.SET_NULL,
-                                null=True,
-                                blank=True)
+    discipline = models.ForeignKey(
+        Discipline,
+        verbose_name='Дисциплина',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    partner = models.ForeignKey(
+        Partner,
+        verbose_name='Партнер',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
     preview = models.ImageField('Превью', upload_to='images/')
 
     class Meta:
@@ -41,6 +49,8 @@ class Blog(models.Model):
 
 
 class Article(Blog):
+    """Статья."""
+
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
@@ -50,6 +60,8 @@ class Article(Blog):
 
 
 class Interview(Blog):
+    """Интервью."""
+
     class Meta:
         verbose_name = 'Интервью'
         verbose_name_plural = 'Интервью'
@@ -59,6 +71,8 @@ class Interview(Blog):
 
 
 class Film(Blog):
+    """Фильм."""
+
     class Meta:
         verbose_name = 'Фильм'
         verbose_name_plural = 'Фильмы'
@@ -68,6 +82,8 @@ class Film(Blog):
 
 
 class News(Blog):
+    """Новость."""
+
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
