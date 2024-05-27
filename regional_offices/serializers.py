@@ -3,7 +3,8 @@ from rest_framework.serializers import ModelSerializer
 from about.serializers import PartnerShortSerializer
 from employees.serializers import RegionalManagerSerializer
 from info.serializers import DisciplineShortSerializer
-from regional_offices.models import Event, Region
+from media_content.serializers import ImageSerializer, VideoSerializer
+from regional_offices.models import Event, Region, Spot, City
 
 
 class RegionSerializer(ModelSerializer):
@@ -39,3 +40,48 @@ class EventFullSerializer(EventShortSerializer):
             "name", "description", "date", "region", "disciplines", "preview",
             "video", "website", "partners", 'employee',
         )
+
+
+class CitySerializer(EventShortSerializer):
+    """Serializer для модели City."""
+    region = RegionSerializer(read_only=True)
+
+    class Meta:
+        model = City
+        fields = (
+            "id",
+            "name",
+            "region",
+        )
+
+
+class SpotSerializer(EventShortSerializer):
+    """Serializer для модели Локация."""
+    city = CitySerializer(read_only=True)
+    gallery = ImageSerializer(many=True, read_only=True)
+    videos = VideoSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Spot
+        fields = (
+            "id",
+            "name",
+            "city",
+            "name",
+            "spot_type",
+            "address",
+            "website",
+            "gallery",
+            "videos",
+            "coordinates"
+        )
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['spot_type'] = {
+            "value": instance.spot_type,
+            "description": dict(self.Meta.model.TYPES)[instance.spot_type]
+        }
+        region = representation['city'].pop('region')
+        representation['region'] = region
+        return representation

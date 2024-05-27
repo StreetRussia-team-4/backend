@@ -1,12 +1,12 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from regional_offices.views import EventReadViewSet
+from regional_offices.views import EventReadViewSet, SpotReadViewSet
 
-v1_events_router = DefaultRouter()
-v1_events_router.register(r'events', EventReadViewSet, basename='news')
-
+v1_router = DefaultRouter()
+v1_router.register(r'events', EventReadViewSet, basename='events')
+v1_router.register(r'spots', SpotReadViewSet, basename='spots')
 
 urlpatterns = [
-    path('', include(v1_events_router.urls)),
+    path('', include(v1_router.urls)),
 ]
