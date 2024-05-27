@@ -8,7 +8,7 @@ class ImageSerializer(ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('image',)
+        fields = ('id', 'image',)
 
 
 class VideoSerializer(ModelSerializer):
@@ -16,4 +16,4 @@ class VideoSerializer(ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('video',)
+        fields = ('id', 'video',)
