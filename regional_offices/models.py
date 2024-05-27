@@ -48,9 +48,6 @@ class Spot(models.Model):
     spot_type = models.CharField('Тип локации', max_length=2, choices=TYPES)
     address = models.CharField('Адрес', max_length=255)
     website = models.URLField('Ссылка на сайт')
-    region = models.ForeignKey(Region,
-                               verbose_name='Регион',
-                               on_delete=models.CASCADE)
     city = models.ForeignKey(City,
                              verbose_name='Город',
                              on_delete=models.CASCADE)
@@ -61,6 +58,7 @@ class Spot(models.Model):
     videos = models.ManyToManyField(Video,
                                     verbose_name='Ссылки на видео',
                                     blank=True)
+    coordinates = models.CharField('Координаты', max_length=255, blank=True)
 
     class Meta:
         verbose_name = 'Площадка'
