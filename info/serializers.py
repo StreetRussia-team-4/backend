@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from about.serializers import PartnerShortSerializer
-from info.models import Discipline, Article, Interview, Film, News
+from info.models import Article, Discipline, Film, Interview, News
 
 
 class DisciplineShortSerializer(ModelSerializer):

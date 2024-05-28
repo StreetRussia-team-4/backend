@@ -4,7 +4,7 @@ from about.serializers import PartnerShortSerializer
 from employees.serializers import RegionalManagerSerializer
 from info.serializers import DisciplineShortSerializer
 from media_content.serializers import ImageSerializer, VideoSerializer
-from regional_offices.models import Event, Region, Spot, City
+from regional_offices.models import City, Event, Region, Spot
 
 
 class RegionSerializer(ModelSerializer):

@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from about.serializers import PartnerShortSerializer, PartnerSerializer
+from about.serializers import PartnerSerializer
 from projects.models import Project
 from regional_offices.serializers import RegionSerializer
 

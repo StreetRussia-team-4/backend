@@ -3,10 +3,10 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from info.models import News, Article, Interview, Film
+from info.models import Article, Film, Interview, News
 from info.permissions import IsAuthorOrReadOnly
-from info.serializers import (NewsSerializer, ArticleSerializer,
-                              InterviewSerializer, FilmSerializer)
+from info.serializers import (ArticleSerializer, FilmSerializer,
+                              InterviewSerializer, NewsSerializer)
 
 
 @extend_schema(tags=['posts'])

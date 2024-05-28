@@ -1,8 +1,8 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from info.views import (NewsViewSet, FilmViewSet, InterviewViewSet,
-                        ArticleViewSet)
+from info.views import (ArticleViewSet, FilmViewSet, InterviewViewSet,
+                        NewsViewSet)
 
 v1_info_router = DefaultRouter()
 v1_info_router.register('articles', ArticleViewSet, basename='articles')
